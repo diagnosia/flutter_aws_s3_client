@@ -1,3 +1,5 @@
+[![Pub Package](https://img.shields.io/pub/v/flutter_aws_s3_client.svg)](https://pub.dartlang.org/packages/flutter_aws_s3_client)
+
 # flutter_aws_s3_client
 
 Supports downloading objects and listing objects in a bucket.
