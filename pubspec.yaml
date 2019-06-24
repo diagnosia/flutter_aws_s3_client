@@ -1,6 +1,6 @@
 name: flutter_aws_s3_client
-description: A simple, unofficial AWS S3 client
-version: 0.0.1
+description: A simple, unofficial AWS S3 client. Supports downloading objects and listing objects in a bucket.
+version: 0.0.2
 author: Diagnosia <support@diagnosia.com>
 homepage: https://www.diagnosia.com/
 
