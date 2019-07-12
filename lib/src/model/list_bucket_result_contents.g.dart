@@ -15,7 +15,7 @@ class _$ContentsSerializer implements StructuredSerializer<Contents> {
   final String wireName = 'Contents';
 
   @override
-  Iterable serialize(Serializers serializers, Contents object,
+  Iterable<Object> serialize(Serializers serializers, Contents object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'Key',
@@ -36,7 +36,7 @@ class _$ContentsSerializer implements StructuredSerializer<Contents> {
   }
 
   @override
-  Contents deserialize(Serializers serializers, Iterable serialized,
+  Contents deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ContentsBuilder();
 

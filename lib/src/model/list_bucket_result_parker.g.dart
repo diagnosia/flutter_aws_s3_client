@@ -20,7 +20,8 @@ class _$ListBucketResultParkerSerializer
   final String wireName = 'ListBucketResultParker';
 
   @override
-  Iterable serialize(Serializers serializers, ListBucketResultParker object,
+  Iterable<Object> serialize(
+      Serializers serializers, ListBucketResultParker object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'ListBucketResult',
@@ -33,7 +34,7 @@ class _$ListBucketResultParkerSerializer
 
   @override
   ListBucketResultParker deserialize(
-      Serializers serializers, Iterable serialized,
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ListBucketResultParkerBuilder();
 

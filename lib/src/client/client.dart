@@ -1,5 +1,4 @@
 import 'package:amazon_cognito_identity_dart/sig_v4.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:xml2json/xml2json.dart';
 
@@ -16,10 +15,10 @@ class AwsS3Client {
   static const _service = "s3";
 
   AwsS3Client(
-      {@required String secretKey,
-      @required String accessKey,
-      @required String bucket,
-      @required String region,
+      {String secretKey,
+      String accessKey,
+      String bucket,
+      String region,
       String sessionToken})
       : _accessKey = accessKey,
         _secretKey = secretKey,
@@ -36,20 +35,19 @@ class AwsS3Client {
       if (maxKeys != null) "maxKeys": maxKeys.toString(),
     });
 
-    return compute(_parseListObjectResponse, response.body);
+    return _parseListObjectResponse(response.body);
   }
 
   Future<Response> getObject(String key) {
     return _doSignedGetRequest(
-        path:
-            "${'/$key'.split('/').map((s) => Uri.encodeComponent(s)).join('/')}");
+        path: "${'/$key'.split('/').map(Uri.encodeComponent).join('/')}");
   }
 
   ///Returns a [SignedRequestParams] object containing the uri and the HTTP headers
   ///needed to do a signed GET request to AWS S3. Does not actually execute a request.
   ///You can use this method to integrate this client with an HTTP client of your choice.
   SignedRequestParams buildSignedGetParams(
-      {@required String path, Map<String, String> queryParams}) {
+      {String path, Map<String, String> queryParams}) {
     final uri = Uri.https(_bucketUrl, path, queryParams);
     final payload = SigV4.hashCanonicalRequest('');
     final datetime = SigV4.generateDatetime();
@@ -88,7 +86,7 @@ $payload''';
   }
 
   Future<Response> _doSignedGetRequest({
-    @required String path,
+    String path,
     Map<String, String> queryParams,
   }) async {
     final SignedRequestParams params =

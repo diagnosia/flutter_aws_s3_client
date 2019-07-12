@@ -15,6 +15,4 @@ void main() async {
 
   final response = await s3client.getObject("at/3/drugs_at.sqlite");
   print(response.body.toString());
-
-  runApp(Text(response.body));
 }

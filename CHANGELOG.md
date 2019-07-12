@@ -1,3 +1,5 @@
+## [0.1.0] - Remove dependency on flutter, Update dependencies
+
 ## [0.0.4] - Add example
 
 ## [0.0.3] - Fix homepage

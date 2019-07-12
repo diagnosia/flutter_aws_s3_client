@@ -17,7 +17,7 @@ class _$ListBucketResultSerializer
   final String wireName = 'ListBucketResult';
 
   @override
-  Iterable serialize(Serializers serializers, ListBucketResult object,
+  Iterable<Object> serialize(Serializers serializers, ListBucketResult object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'Name',
@@ -41,7 +41,8 @@ class _$ListBucketResultSerializer
   }
 
   @override
-  ListBucketResult deserialize(Serializers serializers, Iterable serialized,
+  ListBucketResult deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ListBucketResultBuilder();
 
@@ -69,8 +70,9 @@ class _$ListBucketResultSerializer
           break;
         case 'Contents':
           result.contents.replace(serializers.deserialize(value,
-              specifiedType: const FullType(
-                  BuiltList, const [const FullType(Contents)])) as BuiltList);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(Contents)]))
+              as BuiltList<dynamic>);
           break;
       }
     }
