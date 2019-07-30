@@ -5,7 +5,7 @@ void main() async {
   final region = "eu-central-1";
   final AwsS3Client s3client = AwsS3Client(
       region: "eu-central-1",
-      bucket: "bucketid.$region.amazonaws.com",
+      bucket: "bucketid.s3.$region.amazonaws.com",
       accessKey: "<your access key>",
       secretKey: "<your secret key>");
 
