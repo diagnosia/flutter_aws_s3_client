@@ -1,3 +1,7 @@
+## [0.2.0]
+
+* Check the status code before trying to parse responses. Throw exceptions on error status codes. 
+
 ## [0.1.0] - Remove dependency on flutter, Update dependencies
 
 ## [0.0.4] - Add example
