@@ -1,4 +1,5 @@
 import 'package:amazon_cognito_identity_dart/sig_v4.dart';
+import 'package:flutter_aws_s3_client/src/client/exceptions.dart';
 import 'package:http/http.dart';
 import 'package:xml2json/xml2json.dart';
 
@@ -34,7 +35,7 @@ class AwsS3Client {
       if (delimiter != null) "delimiter": delimiter,
       if (maxKeys != null) "maxKeys": maxKeys.toString(),
     });
-
+    _checkResponseError(response);
     return _parseListObjectResponse(response.body);
   }
 
@@ -92,6 +93,18 @@ $payload''';
     final SignedRequestParams params =
         buildSignedGetParams(path: path, queryParams: queryParams);
     return get(params.uri, headers: params.headers);
+  }
+
+  void _checkResponseError(Response response) {
+    if (response.statusCode >= 200 && response.statusCode <= 300) {
+      return;
+    }
+    switch (response.statusCode) {
+      case 403:
+        throw NoPermissionsException(response);
+      default:
+        throw S3Exception(response);
+    }
   }
 }
 
