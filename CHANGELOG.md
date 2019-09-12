@@ -1,3 +1,8 @@
+## [0.3.0]
+
+* BREAKING CHANGE: renamed 'path' parameter to 'key'
+* Fix bug that caused a wrong signature when key contains characters that need to be url-encoded
+
 ## [0.2.0]
 
 * Check the status code before trying to parse responses. Throw exceptions on error status codes. 

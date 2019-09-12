@@ -14,15 +14,15 @@ If you implement more methods, feel free to open a pull request.
 
 ### Build the client
 
-
+```dart
     final AwsS3Client s3client = AwsS3Client(
-       region: <Region>,
-       bucket: <Bucket>,
-       accessKey: <AccessKey>,
-       secretKey: <SecretKey>,
-       sessionToken: <Optional: Session Token (if required)>
+       region: region,
+       bucket: bucket,
+       accessKey: accessKey,
+       secretKey: secretKey,
+       sessionToken: sessionToken //optional
      );
-
+```
 
 ### Get an object
 
@@ -40,3 +40,33 @@ If you implement more methods, feel free to open a pull request.
 If you want to use a custom http client, use the method `buildSignedGetParams`.
 This method returns an object containing the URL and the Authorization headers, which can be 
 used to build the request with your preferred http client.
+
+
+### Download a large object to a file without keeping everything in-memory (streaming)
+
+Use the `buildSignedGetParams` method.
+
+Example code (with ETag support):
+
+```dart
+
+Future download(String key, File file, [String etag = null]) async {
+
+  final signedParams = awsS3Client.buildSignedGetParams(key: key);
+
+  final request = await HttpClient().getUrl(signedParams.uri);
+
+  for (final header in (signedParams.headers ?? const {}).entries) {
+    request.headers.add(header.key, header.value);
+  }
+  if(eTag != null){
+    request.headers.add(HttpHeaders.ifNoneMatchHeader, eTag);
+  }
+  final response = response = await request.close();
+  if(response.statusCode != HttpStatus.ok){
+     //handle error  
+  }else{
+     return response.pipe(file.openWrite());
+  }
+}
+```
