@@ -29,7 +29,7 @@ class AwsS3Client {
 
   Future<ListBucketResult> listObjects(
       {String prefix, String delimiter, int maxKeys}) async {
-    final response = await _doSignedGetRequest(path: "/", queryParams: {
+    final response = await _doSignedGetRequest(key: '', queryParams: {
       "list-type": "2",
       if (prefix != null) "prefix": prefix,
       if (delimiter != null) "delimiter": delimiter,
@@ -40,16 +40,19 @@ class AwsS3Client {
   }
 
   Future<Response> getObject(String key) {
-    return _doSignedGetRequest(
-        path: "${'/$key'.split('/').map(Uri.encodeComponent).join('/')}");
+    return _doSignedGetRequest(key: key);
   }
+
+  String keytoPath(String key) =>
+      "${'/$key'.split('/').map(Uri.encodeQueryComponent).join('/')}";
+
 
   ///Returns a [SignedRequestParams] object containing the uri and the HTTP headers
   ///needed to do a signed GET request to AWS S3. Does not actually execute a request.
   ///You can use this method to integrate this client with an HTTP client of your choice.
   SignedRequestParams buildSignedGetParams(
-      {String path, Map<String, String> queryParams}) {
-    final uri = Uri.https(_bucketUrl, path, queryParams);
+      {String key, Map<String, String> queryParams}) {
+    final uri = Uri.https(_bucketUrl, key, queryParams);
     final payload = SigV4.hashCanonicalRequest('');
     final datetime = SigV4.generateDatetime();
     final credentialScope =
@@ -57,7 +60,7 @@ class AwsS3Client {
 
     final canonicalQuery = SigV4.buildCanonicalQueryString(queryParams);
     final canonicalRequest = '''GET
-${uri.path}
+${'/$key'.split('/').map(Uri.encodeComponent).join('/')}
 $canonicalQuery
 host:$_bucketUrl
 x-amz-content-sha256:$payload
@@ -87,11 +90,11 @@ $payload''';
   }
 
   Future<Response> _doSignedGetRequest({
-    String path,
+    String key,
     Map<String, String> queryParams,
   }) async {
     final SignedRequestParams params =
-        buildSignedGetParams(path: path, queryParams: queryParams);
+        buildSignedGetParams(key: key, queryParams: queryParams);
     return get(params.uri, headers: params.headers);
   }
 
