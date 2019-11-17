@@ -20,14 +20,19 @@ abstract class ListBucketResult
 
   @BuiltValueField(wireName: 'Name')
   String get name;
+
   @BuiltValueField(wireName: 'Prefix')
   String get prefix;
+
   @BuiltValueField(wireName: 'MaxKeys')
   String get maxKeys;
+
   @BuiltValueField(wireName: 'IsTruncated')
   String get isTruncated;
+
   @BuiltValueField(wireName: 'Contents')
   BuiltList<Contents> get contents;
+
   String toJson() {
     return json
         .encode(serializers.serializeWith(ListBucketResult.serializer, this));

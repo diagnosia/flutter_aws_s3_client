@@ -1,4 +1,3 @@
-
 import 'package:http/http.dart';
 
 class S3Exception implements Exception {
@@ -19,9 +18,8 @@ class S3Exception implements Exception {
 }
 
 class NoPermissionsException extends S3Exception {
-
   NoPermissionsException(Response response) : super(response);
 
-  String get devDebugHint => "S3 returned a 403 status code. Please make sure you have the right permissons for this request";
-
+  String get devDebugHint =>
+      "S3 returned a 403 status code. Please make sure you have the right permissons for this request";
 }

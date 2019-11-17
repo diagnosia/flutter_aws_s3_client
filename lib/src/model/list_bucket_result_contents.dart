@@ -16,14 +16,19 @@ abstract class Contents implements Built<Contents, ContentsBuilder> {
 
   @BuiltValueField(wireName: 'Key')
   String get key;
+
   @BuiltValueField(wireName: 'LastModified')
   String get lastModified;
+
   @BuiltValueField(wireName: 'ETag')
   String get eTag;
+
   @BuiltValueField(wireName: 'Size')
   String get size;
+
   @BuiltValueField(wireName: 'StorageClass')
   String get storageClass;
+
   String toJson() {
     return json.encode(serializers.serializeWith(Contents.serializer, this));
   }
