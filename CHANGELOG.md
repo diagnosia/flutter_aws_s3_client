@@ -1,3 +1,11 @@
+## [0.4.1]
+
+* Update xml2json 4.0.0
+
+## [0.4.0]
+
+* Update dependency versions
+
 ## [0.3.0]
 
 * BREAKING CHANGE: renamed 'path' parameter to 'key'
