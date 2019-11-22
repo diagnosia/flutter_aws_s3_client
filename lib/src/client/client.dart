@@ -9,23 +9,29 @@ import '../model/list_bucket_result_parker.dart';
 class AwsS3Client {
   final String _secretKey;
   final String _accessKey;
-  final String _bucketUrl;
+  final String _host;
   final String _region;
+  final String _bucketId;
   final String _sessionToken;
+  final Client _client;
 
   static const _service = "s3";
 
   AwsS3Client(
       {String secretKey,
       String accessKey,
-      String bucket,
+      String bucketId,
+      String host,
       String region,
-      String sessionToken})
+      String sessionToken,
+      Client client})
       : _accessKey = accessKey,
         _secretKey = secretKey,
-        _bucketUrl = bucket,
+        _host = host,
+        _bucketId = bucketId,
         _region = region,
-        _sessionToken = sessionToken;
+        _sessionToken = sessionToken,
+        _client = client ?? Client();
 
   Future<ListBucketResult> listObjects(
       {String prefix, String delimiter, int maxKeys}) async {
@@ -51,7 +57,8 @@ class AwsS3Client {
   ///You can use this method to integrate this client with an HTTP client of your choice.
   SignedRequestParams buildSignedGetParams(
       {String key, Map<String, String> queryParams}) {
-    final uri = Uri.https(_bucketUrl, key, queryParams);
+    final unencodedPath = "$_bucketId/$key";
+    final uri = Uri.https(_host, unencodedPath, queryParams);
     final payload = SigV4.hashCanonicalRequest('');
     final datetime = SigV4.generateDatetime();
     final credentialScope =
@@ -59,9 +66,9 @@ class AwsS3Client {
 
     final canonicalQuery = SigV4.buildCanonicalQueryString(queryParams);
     final canonicalRequest = '''GET
-${'/$key'.split('/').map(Uri.encodeComponent).join('/')}
+${'/$unencodedPath'.split('/').map(Uri.encodeComponent).join('/')}
 $canonicalQuery
-host:$_bucketUrl
+host:$_host
 x-amz-content-sha256:$payload
 x-amz-date:$datetime
 x-amz-security-token:${_sessionToken ?? ""}
@@ -94,7 +101,7 @@ $payload''';
   }) async {
     final SignedRequestParams params =
         buildSignedGetParams(key: key, queryParams: queryParams);
-    return get(params.uri, headers: params.headers);
+    return _client.get(params.uri, headers: params.headers);
   }
 
   void _checkResponseError(Response response) {

@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 
 void main() async {
   final region = "eu-central-1";
+  final bucketId = "yourBucketId";
   final AwsS3Client s3client = AwsS3Client(
-      region: "eu-central-1",
-      bucket: "bucketid.s3.$region.amazonaws.com",
+      region: region,
+      host: "s3.$region.amazonaws.com",
+      bucketId: bucketId,
       accessKey: "<your access key>",
       secretKey: "<your secret key>");
 
