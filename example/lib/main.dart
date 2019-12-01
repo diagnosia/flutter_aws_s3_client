@@ -1,9 +1,8 @@
 import 'package:flutter_aws_s3_client/flutter_aws_s3_client.dart';
-import 'package:flutter/material.dart';
 
 void main() async {
-  final region = "eu-central-1";
-  final bucketId = "yourBucketId";
+  const region = "eu-central-1";
+  const bucketId = "yourBucketId";
   final AwsS3Client s3client = AwsS3Client(
       region: region,
       host: "s3.$region.amazonaws.com",
@@ -11,10 +10,10 @@ void main() async {
       accessKey: "<your access key>",
       secretKey: "<your secret key>");
 
-  var listBucketResult =
+  final listBucketResult =
       await s3client.listObjects(prefix: "dir/dir2/", delimiter: "/");
   print(listBucketResult.toString());
 
-  final response = await s3client.getObject("at/3/drugs_at.sqlite");
+  final response = await s3client.getObject("yourObjectId");
   print(response.body.toString());
 }
