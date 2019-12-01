@@ -17,6 +17,15 @@ class AwsS3Client {
 
   static const _service = "s3";
 
+  /// Creates a new AwsS3Client instance.
+  ///
+  /// @param secretKey The secret key. Required. see https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html
+  /// @param accessKey The access key. Required. see https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html
+  /// @param bucketId The bucket. Required. See https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro
+  /// @param host The host, in path-style. Defaults to "s3.$region.amazonaws.com". See https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro
+  /// @param region The region of the bucket. Required.
+  /// @param sessionToken The session token. Optional.
+  /// @param client The http client. Optional. Useful for debugging.
   AwsS3Client(
       {String secretKey,
       String accessKey,
@@ -27,7 +36,7 @@ class AwsS3Client {
       Client client})
       : _accessKey = accessKey,
         _secretKey = secretKey,
-        _host = host,
+        _host = host ?? "s3.$region.amazonaws.com",
         _bucketId = bucketId,
         _region = region,
         _sessionToken = sessionToken,
