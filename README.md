@@ -15,13 +15,15 @@ If you implement more methods, feel free to open a pull request.
 ### Build the client
 
 ```dart
-    final AwsS3Client s3client = AwsS3Client(
-       region: region,
-       bucket: bucket,
-       accessKey: accessKey,
-       secretKey: secretKey,
-       sessionToken: sessionToken //optional
-     );
+  const region = "eu-central-1";
+  const bucketId = "yourBucketId";
+  final AwsS3Client s3client = AwsS3Client(
+      region: region,
+      host: "s3.$region.amazonaws.com",
+      bucketId: bucketId,
+      accessKey: "<your access key>",
+      secretKey: "<your secret key>");
+
 ```
 
 ### Get an object
