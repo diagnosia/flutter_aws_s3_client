@@ -1,3 +1,10 @@
+## [0.5.0]
+
+* BREAKING CHANGE: Migrate from host-styled url scheming to path-styled URLs to allow buckets that contain dots (See issue #4)
+  Thanks to ketanm!
+
+* Broaden dependency ranges
+
 ## [0.4.1]
 
 * Update xml2json 4.0.0
