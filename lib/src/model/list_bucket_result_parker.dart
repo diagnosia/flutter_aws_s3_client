@@ -28,6 +28,11 @@ abstract class ListBucketResultParker
         ListBucketResultParker.serializer, json.decode(jsonString));
   }
 
+  static ListBucketResultParker fromJsonMap(Map<String, dynamic> jsonMap) {
+    return serializers.deserializeWith(
+        ListBucketResultParker.serializer, jsonMap);
+  }
+
   static Serializer<ListBucketResultParker> get serializer =>
       _$listBucketResultParkerSerializer;
 }

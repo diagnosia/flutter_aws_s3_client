@@ -31,12 +31,20 @@ class _$ListBucketResultSerializer
       'IsTruncated',
       serializers.serialize(object.isTruncated,
           specifiedType: const FullType(String)),
-      'Contents',
-      serializers.serialize(object.contents,
-          specifiedType:
-              const FullType(BuiltList, const [const FullType(Contents)])),
     ];
-
+    if (object.keyCount != null) {
+      result
+        ..add('KeyCount')
+        ..add(serializers.serialize(object.keyCount,
+            specifiedType: const FullType(String)));
+    }
+    if (object.contents != null) {
+      result
+        ..add('Contents')
+        ..add(serializers.serialize(object.contents,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Contents)])));
+    }
     return result;
   }
 
@@ -64,6 +72,10 @@ class _$ListBucketResultSerializer
           result.maxKeys = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'KeyCount':
+          result.keyCount = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'IsTruncated':
           result.isTruncated = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -72,7 +84,7 @@ class _$ListBucketResultSerializer
           result.contents.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(Contents)]))
-              as BuiltList<dynamic>);
+              as BuiltList<Object>);
           break;
       }
     }
@@ -89,6 +101,8 @@ class _$ListBucketResult extends ListBucketResult {
   @override
   final String maxKeys;
   @override
+  final String keyCount;
+  @override
   final String isTruncated;
   @override
   final BuiltList<Contents> contents;
@@ -98,7 +112,12 @@ class _$ListBucketResult extends ListBucketResult {
       (new ListBucketResultBuilder()..update(updates)).build();
 
   _$ListBucketResult._(
-      {this.name, this.prefix, this.maxKeys, this.isTruncated, this.contents})
+      {this.name,
+      this.prefix,
+      this.maxKeys,
+      this.keyCount,
+      this.isTruncated,
+      this.contents})
       : super._() {
     if (name == null) {
       throw new BuiltValueNullFieldError('ListBucketResult', 'name');
@@ -111,9 +130,6 @@ class _$ListBucketResult extends ListBucketResult {
     }
     if (isTruncated == null) {
       throw new BuiltValueNullFieldError('ListBucketResult', 'isTruncated');
-    }
-    if (contents == null) {
-      throw new BuiltValueNullFieldError('ListBucketResult', 'contents');
     }
   }
 
@@ -132,6 +148,7 @@ class _$ListBucketResult extends ListBucketResult {
         name == other.name &&
         prefix == other.prefix &&
         maxKeys == other.maxKeys &&
+        keyCount == other.keyCount &&
         isTruncated == other.isTruncated &&
         contents == other.contents;
   }
@@ -139,7 +156,11 @@ class _$ListBucketResult extends ListBucketResult {
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc($jc(0, name.hashCode), prefix.hashCode), maxKeys.hashCode),
+        $jc(
+            $jc(
+                $jc($jc($jc(0, name.hashCode), prefix.hashCode),
+                    maxKeys.hashCode),
+                keyCount.hashCode),
             isTruncated.hashCode),
         contents.hashCode));
   }
@@ -150,6 +171,7 @@ class _$ListBucketResult extends ListBucketResult {
           ..add('name', name)
           ..add('prefix', prefix)
           ..add('maxKeys', maxKeys)
+          ..add('keyCount', keyCount)
           ..add('isTruncated', isTruncated)
           ..add('contents', contents))
         .toString();
@@ -172,6 +194,10 @@ class ListBucketResultBuilder
   String get maxKeys => _$this._maxKeys;
   set maxKeys(String maxKeys) => _$this._maxKeys = maxKeys;
 
+  String _keyCount;
+  String get keyCount => _$this._keyCount;
+  set keyCount(String keyCount) => _$this._keyCount = keyCount;
+
   String _isTruncated;
   String get isTruncated => _$this._isTruncated;
   set isTruncated(String isTruncated) => _$this._isTruncated = isTruncated;
@@ -188,6 +214,7 @@ class ListBucketResultBuilder
       _name = _$v.name;
       _prefix = _$v.prefix;
       _maxKeys = _$v.maxKeys;
+      _keyCount = _$v.keyCount;
       _isTruncated = _$v.isTruncated;
       _contents = _$v.contents?.toBuilder();
       _$v = null;
@@ -217,13 +244,14 @@ class ListBucketResultBuilder
               name: name,
               prefix: prefix,
               maxKeys: maxKeys,
+              keyCount: keyCount,
               isTruncated: isTruncated,
-              contents: contents.build());
+              contents: _contents?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'contents';
-        contents.build();
+        _contents?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'ListBucketResult', _$failedField, e.toString());

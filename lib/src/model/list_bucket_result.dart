@@ -27,10 +27,15 @@ abstract class ListBucketResult
   @BuiltValueField(wireName: 'MaxKeys')
   String get maxKeys;
 
+  @BuiltValueField(wireName: 'KeyCount')
+  @nullable
+  String get keyCount;
+
   @BuiltValueField(wireName: 'IsTruncated')
   String get isTruncated;
 
   @BuiltValueField(wireName: 'Contents')
+  @nullable
   BuiltList<Contents> get contents;
 
   String toJson() {
