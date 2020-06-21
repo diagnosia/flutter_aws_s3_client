@@ -4,7 +4,7 @@
 
 Supports downloading objects and listing objects in a bucket.
 
-The heavy lifting was done by [Amazon Cognito Identity SDK for Dart](https://github.com/jonsaw/amazon-cognito-identity-dart),
+The heavy lifting was done by [Amazon Cognito Identity SDK for Dart](https://github.com/furaiev/amazon-cognito-identity-dart-2),
 this project contains just convenience methods for common use cases.
 
 if you need more requests, you can use this instead to build what you need.
