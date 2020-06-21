@@ -8,13 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
-  amazon_cognito_identity_dart:
+  amazon_cognito_identity_dart_2:
     dependency: "direct main"
     description:
-      name: amazon_cognito_identity_dart
+      name: amazon_cognito_identity_dart_2
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.22"
+    version: "0.1.14"
   analyzer:
     dependency: transitive
     description:

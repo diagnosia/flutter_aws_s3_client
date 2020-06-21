@@ -8,6 +8,6 @@ import 'list_bucket_result_parker.dart';
 
 part 'serializers.g.dart';
 
-@SerializersFor(const [ListBucketResultParker])
+@SerializersFor([ListBucketResultParker])
 Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:amazon_cognito_identity_dart/sig_v4.dart';
+import 'package:amazon_cognito_identity_dart_2/sig_v4.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter_aws_s3_client/src/client/exceptions.dart';
 import 'package:http/http.dart';
@@ -150,7 +150,7 @@ ListBucketResult _parseListObjectResponse(String responseXml) {
         ListBucketResultParker.fromJson(jsonString).result;
 
     return parsedObj;
-  } on DeserializationError catch (e) {
+  } on DeserializationError {
     //fix for https://github.com/diagnosia/flutter_aws_s3_client/issues/6
     //issue due to json/xml transform: Lists with 1 element are transformed to json objects instead of lists
     final fixedJson = json.decode(jsonString);

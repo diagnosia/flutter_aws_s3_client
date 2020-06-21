@@ -7,7 +7,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  amazon_cognito_identity_dart: ^0.0.22
+  amazon_cognito_identity_dart_2: ^0.1.14
   built_value: ">=6.8.0 <8.0.0"
   built_collection: ">=4.0.0 <5.0.0"
   xml2json : ^4.2.0
