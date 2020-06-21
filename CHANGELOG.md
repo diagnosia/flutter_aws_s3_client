@@ -1,3 +1,7 @@
+## 0.5.1
+
+* Fix bug when listing objects in empty directories (see #6 ).
+
 ## [0.5.0]
 
 * BREAKING CHANGE: Migrate from host-styled url scheming to path-styled URLs to allow buckets that contain dots (See issue #4)
