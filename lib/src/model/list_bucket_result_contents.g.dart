@@ -17,21 +17,43 @@ class _$ContentsSerializer implements StructuredSerializer<Contents> {
   @override
   Iterable<Object> serialize(Serializers serializers, Contents object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'Key',
-      serializers.serialize(object.key, specifiedType: const FullType(String)),
-      'LastModified',
-      serializers.serialize(object.lastModified,
-          specifiedType: const FullType(String)),
-      'ETag',
-      serializers.serialize(object.eTag, specifiedType: const FullType(String)),
-      'Size',
-      serializers.serialize(object.size, specifiedType: const FullType(String)),
-      'StorageClass',
-      serializers.serialize(object.storageClass,
-          specifiedType: const FullType(String)),
-    ];
-
+    final result = <Object>[];
+    Object? value;
+    value = object.key;
+    if (value != null) {
+      result
+        ..add('Key')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.lastModified;
+    if (value != null) {
+      result
+        ..add('LastModified')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.eTag;
+    if (value != null) {
+      result
+        ..add('ETag')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.size;
+    if (value != null) {
+      result
+        ..add('Size')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.storageClass;
+    if (value != null) {
+      result
+        ..add('StorageClass')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -44,7 +66,7 @@ class _$ContentsSerializer implements StructuredSerializer<Contents> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'Key':
           result.key = serializers.deserialize(value,
@@ -75,38 +97,22 @@ class _$ContentsSerializer implements StructuredSerializer<Contents> {
 
 class _$Contents extends Contents {
   @override
-  final String key;
+  final String? key;
   @override
-  final String lastModified;
+  final String? lastModified;
   @override
-  final String eTag;
+  final String? eTag;
   @override
-  final String size;
+  final String? size;
   @override
-  final String storageClass;
+  final String? storageClass;
 
-  factory _$Contents([void Function(ContentsBuilder) updates]) =>
+  factory _$Contents([void Function(ContentsBuilder)? updates]) =>
       (new ContentsBuilder()..update(updates)).build();
 
   _$Contents._(
       {this.key, this.lastModified, this.eTag, this.size, this.storageClass})
-      : super._() {
-    if (key == null) {
-      throw new BuiltValueNullFieldError('Contents', 'key');
-    }
-    if (lastModified == null) {
-      throw new BuiltValueNullFieldError('Contents', 'lastModified');
-    }
-    if (eTag == null) {
-      throw new BuiltValueNullFieldError('Contents', 'eTag');
-    }
-    if (size == null) {
-      throw new BuiltValueNullFieldError('Contents', 'size');
-    }
-    if (storageClass == null) {
-      throw new BuiltValueNullFieldError('Contents', 'storageClass');
-    }
-  }
+      : super._();
 
   @override
   Contents rebuild(void Function(ContentsBuilder) updates) =>
@@ -149,37 +155,38 @@ class _$Contents extends Contents {
 }
 
 class ContentsBuilder implements Builder<Contents, ContentsBuilder> {
-  _$Contents _$v;
+  _$Contents? _$v;
 
-  String _key;
-  String get key => _$this._key;
-  set key(String key) => _$this._key = key;
+  String? _key;
+  String? get key => _$this._key;
+  set key(String? key) => _$this._key = key;
 
-  String _lastModified;
-  String get lastModified => _$this._lastModified;
-  set lastModified(String lastModified) => _$this._lastModified = lastModified;
+  String? _lastModified;
+  String? get lastModified => _$this._lastModified;
+  set lastModified(String? lastModified) => _$this._lastModified = lastModified;
 
-  String _eTag;
-  String get eTag => _$this._eTag;
-  set eTag(String eTag) => _$this._eTag = eTag;
+  String? _eTag;
+  String? get eTag => _$this._eTag;
+  set eTag(String? eTag) => _$this._eTag = eTag;
 
-  String _size;
-  String get size => _$this._size;
-  set size(String size) => _$this._size = size;
+  String? _size;
+  String? get size => _$this._size;
+  set size(String? size) => _$this._size = size;
 
-  String _storageClass;
-  String get storageClass => _$this._storageClass;
-  set storageClass(String storageClass) => _$this._storageClass = storageClass;
+  String? _storageClass;
+  String? get storageClass => _$this._storageClass;
+  set storageClass(String? storageClass) => _$this._storageClass = storageClass;
 
   ContentsBuilder();
 
   ContentsBuilder get _$this {
-    if (_$v != null) {
-      _key = _$v.key;
-      _lastModified = _$v.lastModified;
-      _eTag = _$v.eTag;
-      _size = _$v.size;
-      _storageClass = _$v.storageClass;
+    final $v = _$v;
+    if ($v != null) {
+      _key = $v.key;
+      _lastModified = $v.lastModified;
+      _eTag = $v.eTag;
+      _size = $v.size;
+      _storageClass = $v.storageClass;
       _$v = null;
     }
     return this;
@@ -187,14 +194,12 @@ class ContentsBuilder implements Builder<Contents, ContentsBuilder> {
 
   @override
   void replace(Contents other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$Contents;
   }
 
   @override
-  void update(void Function(ContentsBuilder) updates) {
+  void update(void Function(ContentsBuilder)? updates) {
     if (updates != null) updates(this);
   }
 

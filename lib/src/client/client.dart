@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:amazon_cognito_identity_dart_2/sig_v4.dart';
 import 'package:built_value/serializer.dart';
@@ -15,7 +16,7 @@ class AwsS3Client {
   final String _host;
   final String _region;
   final String _bucketId;
-  final String _sessionToken;
+  final String? _sessionToken;
   final Client _client;
 
   static const _service = "s3";
@@ -30,13 +31,13 @@ class AwsS3Client {
   /// @param sessionToken The session token. Optional.
   /// @param client The http client. Optional. Useful for debugging.
   AwsS3Client(
-      {String secretKey,
-      String accessKey,
-      String bucketId,
-      String host,
-      String region,
-      String sessionToken,
-      Client client})
+      {required String secretKey,
+      required String accessKey,
+      required String bucketId,
+      String? host,
+      required String region,
+      String? sessionToken,
+      Client? client})
       : _accessKey = accessKey,
         _secretKey = secretKey,
         _host = host ?? "s3.$region.amazonaws.com",
@@ -45,8 +46,8 @@ class AwsS3Client {
         _sessionToken = sessionToken,
         _client = client ?? Client();
 
-  Future<ListBucketResult> listObjects(
-      {String prefix, String delimiter, int maxKeys}) async {
+  Future<ListBucketResult?> listObjects(
+      {String? prefix, String? delimiter, int? maxKeys}) async {
     final response = await _doSignedGetRequest(key: '', queryParams: {
       "list-type": "2",
       if (prefix != null) "prefix": prefix,
@@ -61,6 +62,10 @@ class AwsS3Client {
     return _doSignedGetRequest(key: key);
   }
 
+  Future<Response> headObject(String key) {
+    return _doSignedHeadRequest(key: key);
+  }
+
   String keytoPath(String key) =>
       "${'/$key'.split('/').map(Uri.encodeQueryComponent).join('/')}";
 
@@ -68,7 +73,7 @@ class AwsS3Client {
   ///needed to do a signed GET request to AWS S3. Does not actually execute a request.
   ///You can use this method to integrate this client with an HTTP client of your choice.
   SignedRequestParams buildSignedGetParams(
-      {String key, Map<String, String> queryParams}) {
+      {required String key, Map<String, String>? queryParams}) {
     final unencodedPath = "$_bucketId/$key";
     final uri = Uri.https(_host, unencodedPath, queryParams);
     final payload = SigV4.hashCanonicalRequest('');
@@ -108,12 +113,21 @@ $payload''';
   }
 
   Future<Response> _doSignedGetRequest({
-    String key,
-    Map<String, String> queryParams,
+    required String key,
+    Map<String, String>? queryParams,
   }) async {
     final SignedRequestParams params =
         buildSignedGetParams(key: key, queryParams: queryParams);
     return _client.get(params.uri, headers: params.headers);
+  }
+
+  Future<Response> _doSignedHeadRequest({
+    required String key,
+    Map<String, String>? queryParams,
+  }) async {
+    final SignedRequestParams params =
+    buildSignedGetParams(key: key, queryParams: queryParams);
+    return _client.head(params.uri, headers: params.headers);
   }
 
   void _checkResponseError(Response response) {
@@ -138,7 +152,7 @@ class SignedRequestParams {
 
 /// aws s3 list bucket response string -> [ListBucketResult] object,
 /// this function should be called via [compute]
-ListBucketResult _parseListObjectResponse(String responseXml) {
+ListBucketResult? _parseListObjectResponse(String responseXml) {
   //parse xml
   final Xml2Json myTransformer = Xml2Json();
   myTransformer.parse(responseXml);
@@ -146,7 +160,7 @@ ListBucketResult _parseListObjectResponse(String responseXml) {
   String jsonString = myTransformer.toParker();
   //parse json to src.model objects
   try {
-    ListBucketResult parsedObj =
+    ListBucketResult? parsedObj =
         ListBucketResultParker.fromJson(jsonString).result;
 
     return parsedObj;

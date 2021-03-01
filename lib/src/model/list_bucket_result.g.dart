@@ -22,26 +22,37 @@ class _$ListBucketResultSerializer
     final result = <Object>[
       'Name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
-      'Prefix',
-      serializers.serialize(object.prefix,
-          specifiedType: const FullType(String)),
       'MaxKeys',
       serializers.serialize(object.maxKeys,
           specifiedType: const FullType(String)),
-      'IsTruncated',
-      serializers.serialize(object.isTruncated,
-          specifiedType: const FullType(String)),
     ];
-    if (object.keyCount != null) {
+    Object? value;
+    value = object.prefix;
+    if (value != null) {
       result
-        ..add('KeyCount')
-        ..add(serializers.serialize(object.keyCount,
+        ..add('Prefix')
+        ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    if (object.contents != null) {
+    value = object.keyCount;
+    if (value != null) {
+      result
+        ..add('KeyCount')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.isTruncated;
+    if (value != null) {
+      result
+        ..add('IsTruncated')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.contents;
+    if (value != null) {
       result
         ..add('Contents')
-        ..add(serializers.serialize(object.contents,
+        ..add(serializers.serialize(value,
             specifiedType:
                 const FullType(BuiltList, const [const FullType(Contents)])));
     }
@@ -58,7 +69,7 @@ class _$ListBucketResultSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'Name':
           result.name = serializers.deserialize(value,
@@ -97,40 +108,31 @@ class _$ListBucketResult extends ListBucketResult {
   @override
   final String name;
   @override
-  final String prefix;
+  final String? prefix;
   @override
   final String maxKeys;
   @override
-  final String keyCount;
+  final String? keyCount;
   @override
-  final String isTruncated;
+  final String? isTruncated;
   @override
-  final BuiltList<Contents> contents;
+  final BuiltList<Contents>? contents;
 
   factory _$ListBucketResult(
-          [void Function(ListBucketResultBuilder) updates]) =>
+          [void Function(ListBucketResultBuilder)? updates]) =>
       (new ListBucketResultBuilder()..update(updates)).build();
 
   _$ListBucketResult._(
-      {this.name,
+      {required this.name,
       this.prefix,
-      this.maxKeys,
+      required this.maxKeys,
       this.keyCount,
       this.isTruncated,
       this.contents})
       : super._() {
-    if (name == null) {
-      throw new BuiltValueNullFieldError('ListBucketResult', 'name');
-    }
-    if (prefix == null) {
-      throw new BuiltValueNullFieldError('ListBucketResult', 'prefix');
-    }
-    if (maxKeys == null) {
-      throw new BuiltValueNullFieldError('ListBucketResult', 'maxKeys');
-    }
-    if (isTruncated == null) {
-      throw new BuiltValueNullFieldError('ListBucketResult', 'isTruncated');
-    }
+    BuiltValueNullFieldError.checkNotNull(name, 'ListBucketResult', 'name');
+    BuiltValueNullFieldError.checkNotNull(
+        maxKeys, 'ListBucketResult', 'maxKeys');
   }
 
   @override
@@ -180,43 +182,44 @@ class _$ListBucketResult extends ListBucketResult {
 
 class ListBucketResultBuilder
     implements Builder<ListBucketResult, ListBucketResultBuilder> {
-  _$ListBucketResult _$v;
+  _$ListBucketResult? _$v;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
-  String _prefix;
-  String get prefix => _$this._prefix;
-  set prefix(String prefix) => _$this._prefix = prefix;
+  String? _prefix;
+  String? get prefix => _$this._prefix;
+  set prefix(String? prefix) => _$this._prefix = prefix;
 
-  String _maxKeys;
-  String get maxKeys => _$this._maxKeys;
-  set maxKeys(String maxKeys) => _$this._maxKeys = maxKeys;
+  String? _maxKeys;
+  String? get maxKeys => _$this._maxKeys;
+  set maxKeys(String? maxKeys) => _$this._maxKeys = maxKeys;
 
-  String _keyCount;
-  String get keyCount => _$this._keyCount;
-  set keyCount(String keyCount) => _$this._keyCount = keyCount;
+  String? _keyCount;
+  String? get keyCount => _$this._keyCount;
+  set keyCount(String? keyCount) => _$this._keyCount = keyCount;
 
-  String _isTruncated;
-  String get isTruncated => _$this._isTruncated;
-  set isTruncated(String isTruncated) => _$this._isTruncated = isTruncated;
+  String? _isTruncated;
+  String? get isTruncated => _$this._isTruncated;
+  set isTruncated(String? isTruncated) => _$this._isTruncated = isTruncated;
 
-  ListBuilder<Contents> _contents;
+  ListBuilder<Contents>? _contents;
   ListBuilder<Contents> get contents =>
       _$this._contents ??= new ListBuilder<Contents>();
-  set contents(ListBuilder<Contents> contents) => _$this._contents = contents;
+  set contents(ListBuilder<Contents>? contents) => _$this._contents = contents;
 
   ListBucketResultBuilder();
 
   ListBucketResultBuilder get _$this {
-    if (_$v != null) {
-      _name = _$v.name;
-      _prefix = _$v.prefix;
-      _maxKeys = _$v.maxKeys;
-      _keyCount = _$v.keyCount;
-      _isTruncated = _$v.isTruncated;
-      _contents = _$v.contents?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _name = $v.name;
+      _prefix = $v.prefix;
+      _maxKeys = $v.maxKeys;
+      _keyCount = $v.keyCount;
+      _isTruncated = $v.isTruncated;
+      _contents = $v.contents?.toBuilder();
       _$v = null;
     }
     return this;
@@ -224,14 +227,12 @@ class ListBucketResultBuilder
 
   @override
   void replace(ListBucketResult other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ListBucketResult;
   }
 
   @override
-  void update(void Function(ListBucketResultBuilder) updates) {
+  void update(void Function(ListBucketResultBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -241,14 +242,16 @@ class ListBucketResultBuilder
     try {
       _$result = _$v ??
           new _$ListBucketResult._(
-              name: name,
+              name: BuiltValueNullFieldError.checkNotNull(
+                  name, 'ListBucketResult', 'name'),
               prefix: prefix,
-              maxKeys: maxKeys,
+              maxKeys: BuiltValueNullFieldError.checkNotNull(
+                  maxKeys, 'ListBucketResult', 'maxKeys'),
               keyCount: keyCount,
               isTruncated: isTruncated,
               contents: _contents?.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'contents';
         _contents?.build();

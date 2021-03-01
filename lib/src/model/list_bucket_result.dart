@@ -15,28 +15,26 @@ abstract class ListBucketResult
     implements Built<ListBucketResult, ListBucketResultBuilder> {
   ListBucketResult._();
 
-  factory ListBucketResult([updates(ListBucketResultBuilder b)]) =
+  factory ListBucketResult([updates(ListBucketResultBuilder b)?]) =
       _$ListBucketResult;
 
   @BuiltValueField(wireName: 'Name')
   String get name;
 
   @BuiltValueField(wireName: 'Prefix')
-  String get prefix;
+  String? get prefix;
 
   @BuiltValueField(wireName: 'MaxKeys')
   String get maxKeys;
 
   @BuiltValueField(wireName: 'KeyCount')
-  @nullable
-  String get keyCount;
+  String? get keyCount;
 
   @BuiltValueField(wireName: 'IsTruncated')
-  String get isTruncated;
+  String? get isTruncated;
 
   @BuiltValueField(wireName: 'Contents')
-  @nullable
-  BuiltList<Contents> get contents;
+  BuiltList<Contents>? get contents;
 
   String toJson() {
     return json

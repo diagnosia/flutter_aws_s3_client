@@ -23,12 +23,15 @@ class _$ListBucketResultParkerSerializer
   Iterable<Object> serialize(
       Serializers serializers, ListBucketResultParker object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'ListBucketResult',
-      serializers.serialize(object.result,
-          specifiedType: const FullType(ListBucketResult)),
-    ];
-
+    final result = <Object>[];
+    Object? value;
+    value = object.result;
+    if (value != null) {
+      result
+        ..add('ListBucketResult')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(ListBucketResult)));
+    }
     return result;
   }
 
@@ -42,7 +45,7 @@ class _$ListBucketResultParkerSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final dynamic value = iterator.current;
+      final Object value = iterator.current;
       switch (key) {
         case 'ListBucketResult':
           result.result.replace(serializers.deserialize(value,
@@ -58,17 +61,13 @@ class _$ListBucketResultParkerSerializer
 
 class _$ListBucketResultParker extends ListBucketResultParker {
   @override
-  final ListBucketResult result;
+  final ListBucketResult? result;
 
   factory _$ListBucketResultParker(
-          [void Function(ListBucketResultParkerBuilder) updates]) =>
+          [void Function(ListBucketResultParkerBuilder)? updates]) =>
       (new ListBucketResultParkerBuilder()..update(updates)).build();
 
-  _$ListBucketResultParker._({this.result}) : super._() {
-    if (result == null) {
-      throw new BuiltValueNullFieldError('ListBucketResultParker', 'result');
-    }
-  }
+  _$ListBucketResultParker._({this.result}) : super._();
 
   @override
   ListBucketResultParker rebuild(
@@ -100,18 +99,19 @@ class _$ListBucketResultParker extends ListBucketResultParker {
 
 class ListBucketResultParkerBuilder
     implements Builder<ListBucketResultParker, ListBucketResultParkerBuilder> {
-  _$ListBucketResultParker _$v;
+  _$ListBucketResultParker? _$v;
 
-  ListBucketResultBuilder _result;
+  ListBucketResultBuilder? _result;
   ListBucketResultBuilder get result =>
       _$this._result ??= new ListBucketResultBuilder();
-  set result(ListBucketResultBuilder result) => _$this._result = result;
+  set result(ListBucketResultBuilder? result) => _$this._result = result;
 
   ListBucketResultParkerBuilder();
 
   ListBucketResultParkerBuilder get _$this {
-    if (_$v != null) {
-      _result = _$v.result?.toBuilder();
+    final $v = _$v;
+    if ($v != null) {
+      _result = $v.result?.toBuilder();
       _$v = null;
     }
     return this;
@@ -119,14 +119,12 @@ class ListBucketResultParkerBuilder
 
   @override
   void replace(ListBucketResultParker other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
+    ArgumentError.checkNotNull(other, 'other');
     _$v = other as _$ListBucketResultParker;
   }
 
   @override
-  void update(void Function(ListBucketResultParkerBuilder) updates) {
+  void update(void Function(ListBucketResultParkerBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -134,12 +132,13 @@ class ListBucketResultParkerBuilder
   _$ListBucketResultParker build() {
     _$ListBucketResultParker _$result;
     try {
-      _$result = _$v ?? new _$ListBucketResultParker._(result: result.build());
+      _$result =
+          _$v ?? new _$ListBucketResultParker._(result: _result?.build());
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'result';
-        result.build();
+        _result?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'ListBucketResultParker', _$failedField, e.toString());

@@ -13,9 +13,9 @@ abstract class ListBucketResultParker
   ListBucketResultParker._();
 
   @BuiltValueField(wireName: "ListBucketResult")
-  ListBucketResult get result;
+  ListBucketResult? get result;
 
-  factory ListBucketResultParker([updates(ListBucketResultParkerBuilder b)]) =
+  factory ListBucketResultParker([updates(ListBucketResultParkerBuilder b)?]) =
       _$ListBucketResultParker;
 
   String toJson() {

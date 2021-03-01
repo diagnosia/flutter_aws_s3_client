@@ -12,22 +12,22 @@ part 'list_bucket_result_contents.g.dart';
 abstract class Contents implements Built<Contents, ContentsBuilder> {
   Contents._();
 
-  factory Contents([updates(ContentsBuilder b)]) = _$Contents;
+  factory Contents([updates(ContentsBuilder b)?]) = _$Contents;
 
   @BuiltValueField(wireName: 'Key')
-  String get key;
+  String? get key;
 
   @BuiltValueField(wireName: 'LastModified')
-  String get lastModified;
+  String? get lastModified;
 
   @BuiltValueField(wireName: 'ETag')
-  String get eTag;
+  String? get eTag;
 
   @BuiltValueField(wireName: 'Size')
-  String get size;
+  String? get size;
 
   @BuiltValueField(wireName: 'StorageClass')
-  String get storageClass;
+  String? get storageClass;
 
   String toJson() {
     return json.encode(serializers.serializeWith(Contents.serializer, this));
