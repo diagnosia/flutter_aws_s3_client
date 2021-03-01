@@ -1,5 +1,10 @@
 [![Pub Package](https://img.shields.io/pub/v/flutter_aws_s3_client.svg)](https://pub.dartlang.org/packages/flutter_aws_s3_client)
 
+# DEPRECATED
+
+Since there is now an official package for accessing AWS services, I decided to not longer support this package. please migrate to https://github.com/aws-amplify/amplify-flutter / https://pub.dev/packages/amplify_storage_s3/example
+
+
 # flutter_aws_s3_client
 
 Supports downloading objects and listing objects in a bucket.
