@@ -25,12 +25,12 @@ abstract class ListBucketResultParker
 
   static ListBucketResultParker fromJson(String jsonString) {
     return serializers.deserializeWith(
-        ListBucketResultParker.serializer, json.decode(jsonString));
+        ListBucketResultParker.serializer, json.decode(jsonString))!;
   }
 
   static ListBucketResultParker fromJsonMap(Map<String, dynamic> jsonMap) {
     return serializers.deserializeWith(
-        ListBucketResultParker.serializer, jsonMap);
+        ListBucketResultParker.serializer, jsonMap)!;
   }
 
   static Serializer<ListBucketResultParker> get serializer =>

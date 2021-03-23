@@ -15,9 +15,9 @@ class _$ContentsSerializer implements StructuredSerializer<Contents> {
   final String wireName = 'Contents';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Contents object,
+  Iterable<Object?> serialize(Serializers serializers, Contents object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
+    final result = <Object?>[];
     Object? value;
     value = object.key;
     if (value != null) {
@@ -58,7 +58,7 @@ class _$ContentsSerializer implements StructuredSerializer<Contents> {
   }
 
   @override
-  Contents deserialize(Serializers serializers, Iterable<Object> serialized,
+  Contents deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ContentsBuilder();
 
@@ -66,7 +66,7 @@ class _$ContentsSerializer implements StructuredSerializer<Contents> {
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'Key':
           result.key = serializers.deserialize(value,

@@ -20,10 +20,10 @@ class _$ListBucketResultParkerSerializer
   final String wireName = 'ListBucketResultParker';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, ListBucketResultParker object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
+    final result = <Object?>[];
     Object? value;
     value = object.result;
     if (value != null) {
@@ -37,7 +37,7 @@ class _$ListBucketResultParkerSerializer
 
   @override
   ListBucketResultParker deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ListBucketResultParkerBuilder();
 
@@ -45,11 +45,11 @@ class _$ListBucketResultParkerSerializer
     while (iterator.moveNext()) {
       final key = iterator.current as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'ListBucketResult':
           result.result.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(ListBucketResult))
+                  specifiedType: const FullType(ListBucketResult))!
               as ListBucketResult);
           break;
       }

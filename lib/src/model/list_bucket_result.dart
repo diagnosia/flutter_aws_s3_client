@@ -43,7 +43,7 @@ abstract class ListBucketResult
 
   static ListBucketResult fromJson(String jsonString) {
     return serializers.deserializeWith(
-        ListBucketResult.serializer, json.decode(jsonString));
+        ListBucketResult.serializer, json.decode(jsonString))!;
   }
 
   static Serializer<ListBucketResult> get serializer =>
