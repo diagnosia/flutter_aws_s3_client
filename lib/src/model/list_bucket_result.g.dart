@@ -7,7 +7,7 @@ part of list_bucket_result;
 // **************************************************************************
 
 Serializer<ListBucketResult> _$listBucketResultSerializer =
-    new _$ListBucketResultSerializer();
+    _$ListBucketResultSerializer();
 
 class _$ListBucketResultSerializer
     implements StructuredSerializer<ListBucketResult> {
@@ -53,8 +53,7 @@ class _$ListBucketResultSerializer
       result
         ..add('Contents')
         ..add(serializers.serialize(value,
-            specifiedType:
-                const FullType(BuiltList, const [const FullType(Contents)])));
+            specifiedType: const FullType(BuiltList, [FullType(Contents)])));
     }
     return result;
   }
@@ -63,7 +62,7 @@ class _$ListBucketResultSerializer
   ListBucketResult deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ListBucketResultBuilder();
+    final result = ListBucketResultBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -93,8 +92,8 @@ class _$ListBucketResultSerializer
           break;
         case 'Contents':
           result.contents.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(Contents)]))!
+                  specifiedType:
+                      const FullType(BuiltList, [FullType(Contents)]))!
               as BuiltList<Object>);
           break;
       }
@@ -120,7 +119,7 @@ class _$ListBucketResult extends ListBucketResult {
 
   factory _$ListBucketResult(
           [void Function(ListBucketResultBuilder)? updates]) =>
-      (new ListBucketResultBuilder()..update(updates)).build();
+      (ListBucketResultBuilder()..update(updates)).build();
 
   _$ListBucketResult._(
       {required this.name,
@@ -141,7 +140,7 @@ class _$ListBucketResult extends ListBucketResult {
 
   @override
   ListBucketResultBuilder toBuilder() =>
-      new ListBucketResultBuilder()..replace(this);
+      ListBucketResultBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -206,7 +205,7 @@ class ListBucketResultBuilder
 
   ListBuilder<Contents>? _contents;
   ListBuilder<Contents> get contents =>
-      _$this._contents ??= new ListBuilder<Contents>();
+      _$this._contents ??= ListBuilder<Contents>();
   set contents(ListBuilder<Contents>? contents) => _$this._contents = contents;
 
   ListBucketResultBuilder();
@@ -241,7 +240,7 @@ class ListBucketResultBuilder
     _$ListBucketResult _$result;
     try {
       _$result = _$v ??
-          new _$ListBucketResult._(
+          _$ListBucketResult._(
               name: BuiltValueNullFieldError.checkNotNull(
                   name, 'ListBucketResult', 'name'),
               prefix: prefix,
@@ -256,7 +255,7 @@ class ListBucketResultBuilder
         _$failedField = 'contents';
         _contents?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             'ListBucketResult', _$failedField, e.toString());
       }
       rethrow;

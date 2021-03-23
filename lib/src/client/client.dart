@@ -126,7 +126,7 @@ $payload''';
     Map<String, String>? queryParams,
   }) async {
     final SignedRequestParams params =
-    buildSignedGetParams(key: key, queryParams: queryParams);
+        buildSignedGetParams(key: key, queryParams: queryParams);
     return _client.head(params.uri, headers: params.headers);
   }
 

@@ -6,7 +6,7 @@ part of list_bucket_result_contents;
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<Contents> _$contentsSerializer = new _$ContentsSerializer();
+Serializer<Contents> _$contentsSerializer = _$ContentsSerializer();
 
 class _$ContentsSerializer implements StructuredSerializer<Contents> {
   @override
@@ -60,7 +60,7 @@ class _$ContentsSerializer implements StructuredSerializer<Contents> {
   @override
   Contents deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ContentsBuilder();
+    final result = ContentsBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -108,7 +108,7 @@ class _$Contents extends Contents {
   final String? storageClass;
 
   factory _$Contents([void Function(ContentsBuilder)? updates]) =>
-      (new ContentsBuilder()..update(updates)).build();
+      (ContentsBuilder()..update(updates)).build();
 
   _$Contents._(
       {this.key, this.lastModified, this.eTag, this.size, this.storageClass})
@@ -119,7 +119,7 @@ class _$Contents extends Contents {
       (toBuilder()..update(updates)).build();
 
   @override
-  ContentsBuilder toBuilder() => new ContentsBuilder()..replace(this);
+  ContentsBuilder toBuilder() => ContentsBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -206,7 +206,7 @@ class ContentsBuilder implements Builder<Contents, ContentsBuilder> {
   @override
   _$Contents build() {
     final _$result = _$v ??
-        new _$Contents._(
+        _$Contents._(
             key: key,
             lastModified: lastModified,
             eTag: eTag,

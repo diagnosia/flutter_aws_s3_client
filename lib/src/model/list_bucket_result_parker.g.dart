@@ -7,7 +7,7 @@ part of 'list_bucket_result_parker.dart';
 // **************************************************************************
 
 Serializer<ListBucketResultParker> _$listBucketResultParkerSerializer =
-    new _$ListBucketResultParkerSerializer();
+    _$ListBucketResultParkerSerializer();
 
 class _$ListBucketResultParkerSerializer
     implements StructuredSerializer<ListBucketResultParker> {
@@ -39,7 +39,7 @@ class _$ListBucketResultParkerSerializer
   ListBucketResultParker deserialize(
       Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new ListBucketResultParkerBuilder();
+    final result = ListBucketResultParkerBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -65,7 +65,7 @@ class _$ListBucketResultParker extends ListBucketResultParker {
 
   factory _$ListBucketResultParker(
           [void Function(ListBucketResultParkerBuilder)? updates]) =>
-      (new ListBucketResultParkerBuilder()..update(updates)).build();
+      (ListBucketResultParkerBuilder()..update(updates)).build();
 
   _$ListBucketResultParker._({this.result}) : super._();
 
@@ -76,7 +76,7 @@ class _$ListBucketResultParker extends ListBucketResultParker {
 
   @override
   ListBucketResultParkerBuilder toBuilder() =>
-      new ListBucketResultParkerBuilder()..replace(this);
+      ListBucketResultParkerBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -103,7 +103,7 @@ class ListBucketResultParkerBuilder
 
   ListBucketResultBuilder? _result;
   ListBucketResultBuilder get result =>
-      _$this._result ??= new ListBucketResultBuilder();
+      _$this._result ??= ListBucketResultBuilder();
   set result(ListBucketResultBuilder? result) => _$this._result = result;
 
   ListBucketResultParkerBuilder();
@@ -132,15 +132,14 @@ class ListBucketResultParkerBuilder
   _$ListBucketResultParker build() {
     _$ListBucketResultParker _$result;
     try {
-      _$result =
-          _$v ?? new _$ListBucketResultParker._(result: _result?.build());
+      _$result = _$v ?? _$ListBucketResultParker._(result: _result?.build());
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'result';
         _result?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
+        throw BuiltValueNestedFieldError(
             'ListBucketResultParker', _$failedField, e.toString());
       }
       rethrow;
