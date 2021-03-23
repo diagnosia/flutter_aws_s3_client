@@ -1,21 +1,17 @@
 name: flutter_aws_s3_client
 description: A simple, unofficial AWS S3 client in dart. Supports downloading objects and listing objects in a bucket.
-version: 0.5.2
+version: 0.5.3
 author: Diagnosia <support@diagnosia.com>
 homepage: https://github.com/diagnosia/flutter_aws_s3_client
 environment:
-  sdk: '>=2.12.0-259.12.beta <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  amazon_cognito_identity_dart_2: ^1.0.0-nullsafety.0
+  amazon_cognito_identity_dart_2: ^1.0.0-nullsafety.3
   built_value: "^8.0.0"
   built_collection: "^5.0.0"
-  xml2json : ^5.0.0-nullsafety.0
+  xml2json : ^5.0.0
   http: ^0.13.0
 dev_dependencies:
   built_value_generator: "^8.0.0"
   build_runner: ^1.10.0
-
-dependency_overrides:
-  crypto: ^3.0.0
-  convert: ^3.0.0
