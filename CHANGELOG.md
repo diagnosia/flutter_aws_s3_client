@@ -1,6 +1,11 @@
+## 0.6.0
+
+- null safe release
+
 ## 0.5.3
 
-* dependency updates
+- please do not use, this was published accidentally
+
 
 ## 0.5.2
 
@@ -34,14 +39,22 @@
 
 * Check the status code before trying to parse responses. Throw exceptions on error status codes. 
 
-## 0.1.0 - Remove dependency on flutter, Update dependencies
+## 0.1.0
 
-## 0.0.4 - Add example
+- Remove dependency on flutter, Update dependencies
 
-## 0.0.3 - Fix homepage
+## 0.0.4
 
-## 0.0.2 - Better documentation
+- Add example
 
-## 0.0.1 - Initial Release
+## 0.0.3
 
-* Initial Release. Support GET Bucket (List Objects) and GET Object.
+- Fix homepage
+
+## 0.0.2
+
+- Better documentation
+
+## 0.0.1
+
+- Initial Release. Support GET Bucket (List Objects) and GET Object.
