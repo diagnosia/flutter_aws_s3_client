@@ -1,3 +1,7 @@
+## 0.5.3
+
+* dependency updates
+
 ## 0.5.2
 
 * Switch to amazon_cognito_identity_dart_2
